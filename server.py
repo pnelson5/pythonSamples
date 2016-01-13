@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import sys
 
 class MyServer(BaseHTTPRequestHandler):
 
@@ -13,5 +14,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.close
 
 if __name__ == '__main__':
-    HTTPServer(('localhost', 8000), MyServer).serve_forever()
-
+    port = 8000
+    if len(sys.argv) > 1:
+        port = int(sys.argv[1])
+    HTTPServer(('localhost', port), MyServer).serve_forever()
